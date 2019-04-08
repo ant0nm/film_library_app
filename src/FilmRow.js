@@ -1,16 +1,14 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import Fave from './Fave';
-import FavesContext from './FavesContext';
 import FilmPoster from './FilmPoster';
 
 const FilmRow = ({film}) => {
-  const favesContext = useContext(FavesContext);
-  const handleFilmDetail = () => {
-    console.log(`Showing details for ${film.title}`);
+  const handleDetailsClick = (f) => {
+    console.log(`Fetching details for ${f.title}!`);
   };
 
   return (
-    <article className="film-row" onClick={handleFilmDetail}>
+    <article className="film-row" onClick={() => handleDetailsClick(film)}>
       <FilmPoster film={film} />
 
       <div className="film-summary">
@@ -18,7 +16,7 @@ const FilmRow = ({film}) => {
         <p>{new Date(film.release_date).getFullYear()}</p>
       </div>
 
-      <Fave onFaveToggle={() => favesContext.toggleFave(film)} />
+      <Fave />
     </article>
   );
 };

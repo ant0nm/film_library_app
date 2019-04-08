@@ -1,8 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import FilmRow from './FilmRow';
 
 const FilmList = ({films}) => {
-  const filmList = films.map((film) => {
+  const initialFilter = 'all';
+  const [filter, setFilter] = useState(initialFilter);
+
+  const handleFilterClick = (filter) => {
+    console.log(`Setting filter to ${filter}.`);
+    setFilter(filter);
+  };
+
+  const filmRows = films.map((film) => {
     return (
       <FilmRow film={film} key={film.id} />
     );
@@ -10,8 +18,22 @@ const FilmList = ({films}) => {
 
   return (
     <div className="film-list">
-      <h1 className="section-title">FILMS</h1>
-      {filmList}
+      <h1 className="section-title">
+        FILMS
+      </h1>
+
+      <div className="film-list-filters">
+        <div className={`film-list-filter ${(filter === 'all') ? 'is-active' : ''}`} onClick={() => handleFilterClick('all')}>
+          ALL
+          <span className="section-count">{films.length}</span>
+        </div>
+        <div className={`film-list-filter ${(filter === 'faves') ? 'is-active' : ''}`} onClick={() => handleFilterClick('faves')}>
+          FAVES
+          <span className="section-count">0</span>
+        </div>
+      </div>
+
+      {filmRows}
     </div>
   );
 };

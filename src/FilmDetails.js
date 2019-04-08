@@ -3,9 +3,9 @@ import React from 'react';
 const FilmDetails = ({films}) => {
 
   return (
-    <section className="film-details">
+    <div className="film-details">
       <h1 className="section-title">DETAILS</h1>
-    </section>
+    </div>
   );
 };
 
