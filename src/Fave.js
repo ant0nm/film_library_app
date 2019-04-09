@@ -14,7 +14,7 @@ const Fave = ({onFaveToggle}) => {
   const faveIndicator = (isFave) ? 'remove_from_queue' : 'add_to_queue';
   return (
     <button className={`film-row-fave ${faveIndicator}`} onClick={handleClick}>
-      <i className="material-icons">add_to_queue</i>
+      <i className="material-icons">{faveIndicator}</i>
     </button>
   );
 };

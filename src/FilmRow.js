@@ -1,16 +1,14 @@
-import React, {useContext} from 'react';
+import React, {useState, useContext} from 'react';
 import Fave from './Fave';
 import FilmPoster from './FilmPoster';
 import FavesContext from './FavesContext';
+import TMDB from './TMDB';
 
 const FilmRow = ({film}) => {
   const favesContext = useContext(FavesContext);
-  const handleDetailsClick = (f) => {
-    console.log(`Fetching details for ${f.title}!`);
-  };
 
   return (
-    <article className="film-row" onClick={() => handleDetailsClick(film)}>
+    <article className="film-row" onClick={() => favesContext.toggleCurrentFilm(film)}>
       <FilmPoster film={film} />
 
       <div className="film-summary">
