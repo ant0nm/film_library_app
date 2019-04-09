@@ -1,20 +1,24 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import FilmRow from './FilmRow';
+import FavesContext from './FavesContext';
 
 const FilmList = ({films}) => {
+  const favesFromContext = useContext(FavesContext);
   const initialFilter = 'all';
   const [filter, setFilter] = useState(initialFilter);
+
+  const selectedFilms = (filter === 'faves') ? favesFromContext.faves : films;
+
+  const filmRows = selectedFilms.map((film) => {
+    return (
+      <FilmRow film={film} key={film.id} />
+    );
+  });
 
   const handleFilterClick = (filter) => {
     console.log(`Setting filter to ${filter}.`);
     setFilter(filter);
   };
-
-  const filmRows = films.map((film) => {
-    return (
-      <FilmRow film={film} key={film.id} />
-    );
-  });
 
   return (
     <div className="film-list">
@@ -29,7 +33,7 @@ const FilmList = ({films}) => {
         </div>
         <div className={`film-list-filter ${(filter === 'faves') ? 'is-active' : ''}`} onClick={() => handleFilterClick('faves')}>
           FAVES
-          <span className="section-count">0</span>
+          <span className="section-count">{favesFromContext.faves.length}</span>
         </div>
       </div>
 

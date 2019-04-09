@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-const Fave = () => {
+const Fave = ({onFaveToggle}) => {
   const initialFaveState = false;
   const [isFave, setIsFave] = useState(initialFaveState);
 
@@ -8,6 +8,7 @@ const Fave = () => {
     event.stopPropagation();
     console.log('Fave was clicked!');
     setIsFave(!isFave);
+    onFaveToggle();
   };
 
   const faveIndicator = (isFave) ? 'remove_from_queue' : 'add_to_queue';
